@@ -3,10 +3,10 @@
 SuperDrive is a service application built for the Udacity Nano degree program. It is a Spring Boot app built to provide file storage, note management, and credential management.
 
 ### Installation
-Download repository.
-Open in IDE.
-Run CloudStorageApplication.java
-Visit localhost:8080/login
+1. Download repository
+2. Open in IDE.
+3. Run CloudStorageApplication.java
+4. Visit localhost:8080/login
 
 ### Tested Conditions
 Tests will pass under the following conditions:
