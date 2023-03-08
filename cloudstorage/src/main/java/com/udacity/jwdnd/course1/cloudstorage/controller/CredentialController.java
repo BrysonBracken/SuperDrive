@@ -33,7 +33,6 @@ public class CredentialController {
             }
         } else {
             if (!credentialService.urlInUse(credential.getUrl())) {
-                System.out.println("check");
                 model.addAttribute("errorMessage", "A note with that name already exists!");
             } else {
                 try {
