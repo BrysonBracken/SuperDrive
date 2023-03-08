@@ -32,16 +32,13 @@ public class NoteController {
             }
         }else{
             if (!noteService.titleInUse(note.getNoteTitle())) {
-                System.out.println("check");
                 model.addAttribute("errorMessage", "A note with that name already exists!");
             } else {
                 try {
-                    System.out.println("before save note");
                     note.setUserId(user.getUserId());
 
                     noteService.saveNote(note);
                     model.addAttribute("successMessage", "Note saved successfully.");
-                    System.out.println("after save note");
                 }catch (Exception ex){
                     System.out.println(ex.getLocalizedMessage());
                     model.addAttribute("errorMessage", "Note failed to save!");

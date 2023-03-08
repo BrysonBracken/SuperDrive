@@ -15,14 +15,10 @@ public class NoteService {
     }
 
     public void saveNote(Note note){
-        System.out.println("save");
-        System.out.println(note.getNoteTitle());
-        System.out.println(note.getNoteTitle().getClass());
         noteMapper.insert(note);
     }
 
     public List<Note> getAllNotes(Integer userId){
-        System.out.println("get");
         return noteMapper.getNotes(userId);
     }
 

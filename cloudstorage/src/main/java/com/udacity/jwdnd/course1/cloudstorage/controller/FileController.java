@@ -32,7 +32,6 @@ public class FileController {
 
     @PostMapping
     public String uploadFile(Authentication authentication, MultipartFile fileUpload, Model model) throws IOException {
-        System.out.println("upload");
         if (fileUpload.isEmpty()) {
             model.addAttribute("errorMessage", "Please select a file to upload!");
             return "result";
@@ -63,7 +62,6 @@ public class FileController {
     public ResponseEntity<byte[]> downloadFile(@PathVariable int fileid){
 
         try {
-            System.out.println("download?");
             File file = fileService.getFile(fileid);
             byte[] content = file.getData();
             String name = file.getFileName();

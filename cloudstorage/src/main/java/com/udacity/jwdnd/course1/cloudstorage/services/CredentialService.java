@@ -51,12 +51,6 @@ public class CredentialService {
         return credential;
     }
 
-//    public String decryptPassword(String password, String key){
-//            credential.setCredentialPassword(encryptionService.decryptValue(credential.getCredentialPassword(), credential.getEncryptionKey()));
-//            System.out.println(credential.getCredentialPassword());
-//        return encryptionService.decryptValue(password, key);
-//    }
-
     public boolean urlInUse (String url){
         return credentialMapper.getByUrl(url) == null;
     }
