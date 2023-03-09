@@ -34,9 +34,11 @@ public class HomeController {
     public String homeView (@ModelAttribute("note") Note note, @ModelAttribute("credential") Credential credential, Model model, Authentication authentication){
         String name = authentication.getName();
         User user = userService.getUser(name);
+        // Only allows signed-in users to access page
         if (user == null) {
             return "login";
         }else {
+            // provides template with user's data
             int userId = user.getUserId();
             model.addAttribute("files", fileService.getAllFiles(userId));
             model.addAttribute("notes", noteService.getAllNotes(userId));

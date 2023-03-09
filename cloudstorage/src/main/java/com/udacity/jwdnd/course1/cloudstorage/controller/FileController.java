@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
+// Controller used for any interaction with files from the home page
 @Controller
 @RequestMapping("/file")
 public class FileController {
@@ -30,19 +31,24 @@ public class FileController {
     @Autowired
     private UserService userService;
 
+    // Mapping for initial upload of a file
     @PostMapping
     public String uploadFile(Authentication authentication, MultipartFile fileUpload, Model model) throws IOException {
+        // Checks if a file was selected
         if (fileUpload.isEmpty()) {
             model.addAttribute("errorMessage", "Please select a file to upload!");
             return "result";
         }
+        // Checks if file size is within limit
         if (fileUpload.getSize() > 210000) {
             model.addAttribute("errorMessage", "Please select a file under 2KB to upload!");
             return "result";
         }
+        // Checks if a file already exist with provided file name
         if (!fileService.nameInUse(fileUpload.getOriginalFilename())) {
             model.addAttribute("errorMessage", "A file with that name already exists!");
         } else {
+            // Attempts to save file
             String name = authentication.getName();
             User user = userService.getUser(name);
             File newFile = new File();
@@ -58,6 +64,7 @@ public class FileController {
         return "result";
     }
 
+    // Mapping for downloading of a file
     @GetMapping("/download/{fileid}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable int fileid){
 
@@ -76,8 +83,10 @@ public class FileController {
         return null;
     }
 
+    // Mapping for deletion of a file
     @GetMapping("/delete/{fileid}")
     public String deleteFile(@PathVariable int fileid, Model model){
+        //Attempts to delete file and provide a result message on the result page
         try {
             fileService.deleteFile(fileid);
             model.addAttribute("successMessage", "File successfully deleted!");
